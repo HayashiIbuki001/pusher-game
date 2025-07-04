@@ -35,7 +35,8 @@ public class CoinSpawnerController: MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Instantiate(coinPrefub, transform.position, Quaternion.identity);
+                Quaternion rotation = Quaternion.Euler(90f, 0f, 0f);
+                Instantiate(coinPrefub, transform.position, rotation);
 
                 spawnTime = 0f;
             }
