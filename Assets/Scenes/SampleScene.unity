@@ -857,6 +857,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1017295254}
   - component: {fileID: 1017295253}
+  - component: {fileID: 1017295255}
   m_Layer: 0
   m_Name: System
   m_TagString: Untagged
@@ -894,6 +895,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1017295255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017295252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3dd6f1c3284804885fdebd72bf89ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startCoins: 100
+  currentCoins: 0
 --- !u!1 &1672583900
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,9 +953,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15e56b5500845f84a9ef5b28e076a99f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  coinCountManager: {fileID: 1017295255}
   coinPrefub: {fileID: 1694709869964872261, guid: 1e7b80c6673d48e4e955272983439ba0, type: 3}
+  moveSpeed: 1
   spawnCooldown: 0.3
+  forceAmount: 30
 --- !u!1 &1858170918
 GameObject:
   m_ObjectHideFlags: 0

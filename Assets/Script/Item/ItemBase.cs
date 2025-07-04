@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ItemBase : MonoBehaviour
 {
-    private void Update()
+    public void Base()
     {
         if (transform.position.y <= -20f)
         {

@@ -1,15 +1,23 @@
+using JetBrains.Annotations;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
-public class CoinSpawnerController: MonoBehaviour
+public class CoinSpawnerController : MonoBehaviour
 {
-    [SerializeField] private float speed = 1.0f;
+    [Header("スポナー設定")]
 
-    private Vector3 pos;
+    // === 参照オブジェクト ===
+    [SerializeField] CoinCountManager coinCountManager;
+    [SerializeField] GameObject coinPrefub;
 
-    public GameObject coinPrefub;
-    private float spawnTime = 0f;
+    // === パラメーター ===
+    [SerializeField,Tooltip("左右に動く速さ")] private float moveSpeed = 1.0f;
     [SerializeField] private float spawnCooldown;
+    [SerializeField, Tooltip("生成時の下方向の力")] private float forceAmount = 1.0f;
+
+    // === 状態変数 ===
+    private Vector3 pos;
+    private float spawnTime = 0f;
 
     private void Update()
     {
@@ -22,24 +30,33 @@ public class CoinSpawnerController: MonoBehaviour
         float x = Input.GetAxis("Horizontal");
 
         pos = transform.position;
-        pos.x += x * speed * Time.deltaTime;
+        pos.x += x * moveSpeed * Time.deltaTime;
         pos.x = Mathf.Clamp(pos.x, -11.5f, 7.5f); //(pos.x, 左範囲制限, 右範囲制限)
         transform.position = pos;
     }
 
-    private void Spawn()
+    public void Spawn()
     {
         spawnTime += Time.deltaTime;
 
-        if (spawnTime >= spawnCooldown)
+        if (Input.GetKeyDown(KeyCode.Space) && spawnTime >= spawnCooldown)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (coinCountManager.UseCoin())
             {
+                // 生成
                 Quaternion rotation = Quaternion.Euler(90f, 0f, 0f);
-                Instantiate(coinPrefub, transform.position, rotation);
+                GameObject coin = Instantiate(coinPrefub, transform.position, rotation);
+
+                // 下方向に力を加える
+                Rigidbody rb = coin.GetComponent<Rigidbody>();
+                rb.AddForce(Vector3.down * forceAmount, ForceMode.Impulse);
 
                 spawnTime = 0f;
             }
-        }       
+            else
+            {
+                Debug.Log("コインないよ");
+            }
+        }
     }
 }
