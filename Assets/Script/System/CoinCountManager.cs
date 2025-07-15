@@ -1,13 +1,21 @@
+
 using UnityEngine;
+using TMPro;
 
 public class CoinCountManager : MonoBehaviour
 {
     [SerializeField,Tooltip("‰Šú–‡”")] private int startCoins = 100;
     public int currentCoins;
 
-    private void Awake()
+    public TextMeshProUGUI currentCoinText;
+
+    
+
+
+    private void Start()
     {
         currentCoins = startCoins;
+        TextUpdate();
     }
 
     public bool UseCoin()
@@ -15,7 +23,7 @@ public class CoinCountManager : MonoBehaviour
         if (currentCoins > 0)
         {
             currentCoins--;
-            Debug.Log("–‡”F" + currentCoins + "–‡");
+            TextUpdate();
 
             return true;
         }
@@ -23,5 +31,10 @@ public class CoinCountManager : MonoBehaviour
         {
             return false;
         }
+    }
+
+    void TextUpdate()
+    {
+        currentCoinText.text = $"–‡”F {currentCoins} –‡";
     }
 }
