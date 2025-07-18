@@ -1,21 +1,26 @@
-
 using UnityEngine;
 using TMPro;
 
 public class CoinCountManager : MonoBehaviour
 {
-    [SerializeField,Tooltip("初期枚数")] private int startCoins = 100;
-    public int currentCoins;
+    [SerializeField, Tooltip("初期枚数")] private int startCoins = 100;
+    [SerializeField] private TextMeshProUGUI currentCoinText;
 
-    public TextMeshProUGUI currentCoinText;
-
-    
-
+    //　コインの枚数のUI更新
+    private int _currentCoins;
+    public int currentCoins
+    {
+        get => _currentCoins;
+        set
+        {
+            _currentCoins = value;
+            UpdateText();
+        }
+    }
 
     private void Start()
     {
         currentCoins = startCoins;
-        TextUpdate();
     }
 
     public bool UseCoin()
@@ -23,17 +28,12 @@ public class CoinCountManager : MonoBehaviour
         if (currentCoins > 0)
         {
             currentCoins--;
-            TextUpdate();
-
             return true;
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
-    void TextUpdate()
+    private void UpdateText()
     {
         currentCoinText.text = $"枚数： {currentCoins} 枚";
     }
