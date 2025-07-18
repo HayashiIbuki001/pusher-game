@@ -1,5 +1,3 @@
-using JetBrains.Annotations;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class CoinSpawnerController : MonoBehaviour
@@ -39,7 +37,7 @@ public class CoinSpawnerController : MonoBehaviour
     {
         spawnTime += Time.deltaTime;
 
-        if (Input.GetKeyDown(KeyCode.Space) && spawnTime >= spawnCooldown)
+        if (Input.GetKey(KeyCode.Space) && spawnTime >= spawnCooldown)
         {
             if (coinCountManager.UseCoin())
             {
