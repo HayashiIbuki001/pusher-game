@@ -938,7 +938,7 @@ GameObject:
   - component: {fileID: 1017295253}
   - component: {fileID: 1017295255}
   m_Layer: 0
-  m_Name: System
+  m_Name: PlaySystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -987,7 +987,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startCoins: 100
-  currentCoins: 0
   currentCoinText: {fileID: 2013997113}
 --- !u!1 &1672583900
 GameObject:
