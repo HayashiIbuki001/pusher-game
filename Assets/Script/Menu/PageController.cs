@@ -24,20 +24,14 @@ public class PageController : MonoBehaviour
 
     public void NextPage()
     {
-        if (currentIndex < pages.Length - 1)
-        {
-            currentIndex++;
-            UpdatePage();
-        }
+        currentIndex = (currentIndex + 1) % pages.Length;
+        UpdatePage();
     }
 
     public void BackPage()
     {
-        if (currentIndex > 0)
-        {
-            currentIndex--;
-            UpdatePage();
-        }
+        currentIndex = (currentIndex + 1) % pages.Length;
+        UpdatePage();
     }
 
     private void UpdatePage()
