@@ -8,6 +8,36 @@ public class CoinPool : MonoBehaviour
 
     private List<GameObject> pool;
 
+    private void Awake()
+    {
+        pool = new List<GameObject>();
+        for ( int i = 0; i < poolsize; i++ )
+        {
+            GameObject coin = Instantiate(coinPrefub);
+            coin.SetActive(false);
+            pool.Add(coin);
+        }
+    }
 
+    public GameObject GetCoin()
+    {
+        foreach (var coin in pool)
+        {
+            if (!coin.activeInHierarchy)
+            {
+                coin.SetActive(true);
+                return coin;
+            }
+        }
 
+        // ƒv[ƒ‹‚ª•s‘«‚µ‚½Žž
+        GameObject newCoin = Instantiate(coinPrefub);
+        pool.Add(newCoin);
+        return newCoin;
+    }
+
+    public void ReturnCoin(GameObject coin)
+    {
+        coin.SetActive(false);
+    }
 }

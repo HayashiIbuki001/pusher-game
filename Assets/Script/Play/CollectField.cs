@@ -9,7 +9,7 @@ public class CollectField : MonoBehaviour
         if (other.gameObject.CompareTag("Coin"))
         {
             coinCountManager.currentCoins++;
-            Destroy(other.gameObject);
+            Object.FindAnyObjectByType<CoinPool>().ReturnCoin(other.gameObject);
         }
     }
 }

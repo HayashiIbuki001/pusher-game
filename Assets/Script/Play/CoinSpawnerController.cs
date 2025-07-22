@@ -6,7 +6,7 @@ public class CoinSpawnerController : MonoBehaviour
 
     // === 参照オブジェクト ===
     [SerializeField] CoinCountManager coinCountManager;
-    [SerializeField] GameObject coinPrefub;
+    [SerializeField] private CoinPool coinPool;
 
     // === パラメーター ===
     [SerializeField,Tooltip("左右に動く速さ")] private float moveSpeed = 1.0f;
@@ -41,12 +41,13 @@ public class CoinSpawnerController : MonoBehaviour
         {
             if (coinCountManager.UseCoin())
             {
-                // 生成
-                Quaternion rotation = Quaternion.Euler(90f, 0f, 0f);
-                GameObject coin = Instantiate(coinPrefub, transform.position, rotation);
+                GameObject coin = coinPool.GetCoin();
+                coin.transform.position = transform.position;
+                coin.transform.rotation = Quaternion.Euler(90f, 0f, 0f);
 
-                // 下方向に力を加える
                 Rigidbody rb = coin.GetComponent<Rigidbody>();
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
                 rb.AddForce(Vector3.down * forceAmount, ForceMode.Impulse);
 
                 spawnTime = 0f;
